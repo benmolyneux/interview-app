@@ -31,7 +31,6 @@ export default function Posts() {
       <h1>Posts</h1>
       <ul>
         {posts.map((post) => (
-          //
           <li key={post.id} onClick={() => router.push(`/posts/${post.id}`)}>
             {post.title}
           </li>
