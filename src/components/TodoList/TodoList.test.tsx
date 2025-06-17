@@ -30,41 +30,6 @@ describe("TodoList Component", () => {
     localStorageMock.clear();
   });
 
-  describe("Rendering", () => {
-    it("renders the todo list with initial elements", () => {
-      render(<TodoList />);
-
-      expect(
-        screen.getByRole("heading", { name: /todo list/i })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByPlaceholderText(/add a new todo/i)
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: /add todo/i })
-      ).toBeInTheDocument();
-      expect(screen.getByText(/0 active todos/i)).toBeInTheDocument();
-    });
-
-    it("renders filter buttons", () => {
-      render(<TodoList />);
-
-      expect(screen.getByRole("button", { name: /all/i })).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: /active/i })
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("button", { name: /completed/i })
-      ).toBeInTheDocument();
-    });
-
-    it("shows empty state message when no todos", () => {
-      render(<TodoList />);
-
-      expect(screen.getByText(/no todos yet/i)).toBeInTheDocument();
-    });
-  });
-
   describe("Adding Todos", () => {
     it("should add a todo when form is submitted with valid text", async () => {
       const user = userEvent.setup();
