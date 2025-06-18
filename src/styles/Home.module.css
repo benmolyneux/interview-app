@@ -38,8 +38,6 @@
   align-items: center;
 }
 
-
-
 .sortLabel {
   font-weight: 500;
   color: #555;
@@ -115,7 +113,7 @@
   padding-left: 1rem;
 }
 
-.todoTitle.completed {
+.completed {
   text-decoration: line-through;
   color: #888;
 }
