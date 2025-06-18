@@ -4,7 +4,7 @@ The application is a basic TODO app written in NextJS (Typescript) using the pag
 
 - src/pages/index.tsx - The application UI code
 - src/pages/api/todos.ts - The application API code
-- src/styles/globals.css - The CSS styling
+- src/styles/Home.Module.css - The CSS styling
 - src/types/index.ts - Types for the UI and API
 
 The API uses an in-memory cache to simulate a database. The package it is using is called [memory-cache](https://www.npmjs.com/package/memory-cache).

@@ -53,6 +53,7 @@
 .sortLabel {
   font-weight: 500;
   color: #555;
+  padding-right: 1rem;
 }
 
 .filterLabel {
@@ -60,6 +61,8 @@
   font-size: 1.2rem;
   color: #555;
   cursor: pointer;
+  margin-left: auto;
+  padding-right: 1rem;
 }
 
 .filterCheckbox {
@@ -116,6 +119,7 @@
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 0.5rem;
+  margin-top: 2rem;
 }
 
 .checkboxContainer {
@@ -143,6 +147,8 @@
   font-weight: 500;
   color: #333;
   transition: color 0.2s ease;
+  padding-top: 0.2rem;
+  padding-left: 1rem;
 }
 
 .todoTitle.completed {
@@ -155,6 +161,8 @@
   color: #666;
   white-space: nowrap;
   margin-left: 1rem;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
 }
 
 .deleteButton {

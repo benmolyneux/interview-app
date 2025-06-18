@@ -61,30 +61,27 @@ export default function Home() {
 
       <main className={styles.main}>
         <div className={styles.controls}>
-          <div className={styles.sortContainer}>
-            <label htmlFor="sort" className={styles.sortLabel}>
-              Sort by:
-            </label>
-            <select
-              id="sort"
-              value={sortBy}
-              onChange={handleSortChange}
-              className={styles.sortSelect}
-            >
-              <option value="date">Date</option>
-              <option value="title">Title</option>
-            </select>
-          </div>
-          <div className={styles.filterContainer}>
-            <label htmlFor="hideCompleted" className={styles.filterLabel}>
-              Hide Completed
-            </label>
-            <input
-              type="checkbox"
-              id="hideCompleted"
-              className={styles.checkbox}
-            />
-          </div>
+          <label htmlFor="sort" className={styles.sortLabel}>
+            Sort by:
+          </label>
+          <select
+            id="sort"
+            value={sortBy}
+            onChange={handleSortChange}
+            className={styles.sortSelect}
+          >
+            <option value="date">Date</option>
+            <option value="title">Title</option>
+          </select>
+
+          <label htmlFor="hideCompleted" className={styles.filterLabel}>
+            Hide Completed
+          </label>
+          <input
+            type="checkbox"
+            id="hideCompleted"
+            className={styles.checkbox}
+          />
         </div>
 
         <div className={styles.todoList}>
@@ -104,31 +101,23 @@ export default function Home() {
 const TodoItem = ({ todo, putTodo }: TodoItemProps) => {
   return (
     <div className={styles.todoItem}>
-      <div className={styles.todoContent}>
-        <div className={styles.todoHeader}>
-          <div className={styles.checkboxContainer}>
-            <input
-              type="checkbox"
-              id={`todo-${todo.id}`}
-              checked={todo.completed}
-              onChange={(e) =>
-                putTodo({ ...todo, completed: e.target.checked })
-              }
-              className={styles.checkbox}
-            />
-            <label htmlFor={`todo-${todo.id}`} className={styles.checkboxLabel}>
-              <h3
-                className={`${styles.todoTitle} ${
-                  todo.completed ? styles.completed : ""
-                }`}
-              >
-                {todo.title}
-              </h3>
-            </label>
-          </div>
-          <span className={styles.todoDate}>{todo.date}</span>
-        </div>
-      </div>
+      <input
+        type="checkbox"
+        id={`todo-${todo.id}`}
+        checked={todo.completed}
+        onChange={(e) => putTodo({ ...todo, completed: e.target.checked })}
+        className={styles.checkbox}
+      />
+      <label htmlFor={`todo-${todo.id}`} className={styles.checkboxLabel}>
+        <h3
+          className={`${styles.todoTitle} ${
+            todo.completed ? styles.completed : ""
+          }`}
+        >
+          {todo.title}
+        </h3>
+      </label>
+      <span className={styles.todoDate}>{todo.date}</span>
       <button
         className={styles.deleteButton}
         aria-label={`Delete ${todo.title}`}
@@ -140,7 +129,6 @@ const TodoItem = ({ todo, putTodo }: TodoItemProps) => {
 };
 
 export async function getServerSideProps() {
-  // TODO: Implement server-side data fetching if needed - interviewee task
   return {
     props: {},
   };
