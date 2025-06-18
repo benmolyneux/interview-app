@@ -14,7 +14,7 @@ export interface TodoItemProps {
 }
 
 // Sort options
-export type SortOption = "date" | "title" | "completed";
+export type SortOption = "date" | "title";
 
 // API Types
 export interface CreateTodoRequest {

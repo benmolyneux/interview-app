@@ -1,45 +1,27 @@
-# React/Next.js Interview Tasks
+# Setup
 
-This project contains a collection of tasks designed for mid-level software engineer interviews. Each task is designed to test different aspects of React/Next.js. Typescript is included and should be utilised. 
+- Install dependancies
+- Run application
+- Open application in the browser
 
-## Setup
+# Tasks (30 minutes)
 
-```bash
-npm install
-npm run dev
-```
+- Add the description to the TodoItem. It should be crossed out when the item is marked as completed (Get off mark, ability to read existing code and typescript errors)
 
-The application will be available at [http://localhost:3000](http://localhost:3000)
+- When the 'Hide Completed' checkbox is checked, all completed tasks should not be visible (General react patterns and js filtering)
 
-## Running Tests
+- The items should be sorted by the selected key in the sort select box, date in descending order, title in ascending order (Same again but js sorting)
 
-```bash
-# Run all tests
-npm test
+- Get delete button working with application (API REST understanding and bit of above)
 
-# Run tests in watch mode
-npm run test:watch
+- Create a page for an individual TODO
 
-# Run tests with coverage
-npm run test:coverage
-```
+# Questions (15 minutes)
 
-## Part 1: TodoList Component (Component Development & State Management) ✅
+- Talk me through how you would go about any uncompleted tasks?
 
-**API endpoints available at /api/todos.ts**
+- If you had more time, what would you change about the application and what you do differently?
 
-Create a todo list component with the following requirements:
-- Ability to add new todos via endpoint
-- Ability to update existing todos via endpoint
-- Ability to delete todos via endpoint 
-- Be able sort todos list 
-- Be able to filter todos by status (All, Active, Completed)
-- Use TypeScript for type safety
+- How would you optimise for first page load?
 
-
-## Part 2: Next.js Routing & Data Fetching ✅
-
-Create a blog-style interface with the following requirements:
-- Individual todo page with dynamic routing
-- Server-side rendering for SEO
-- Use TypeScript for type safety
+- Talk me through what your testing strategy would be for the application?

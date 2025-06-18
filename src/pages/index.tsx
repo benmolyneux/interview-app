@@ -8,12 +8,13 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<SortOption>("date");
 
   useEffect(() => {
-    fetchTodos();
+    getTodos();
   }, []);
 
   // API requests
-  const fetchTodos = async (): Promise<void> => {
+  const getTodos = async (): Promise<void> => {
     try {
+      console.log("Fetching TODOs");
       const response = await fetch("/api/todos");
       const data: Todo[] = await response.json();
       setTodos(data);
@@ -24,10 +25,28 @@ export default function Home() {
     }
   };
 
+  const putTodo = async (todo: Todo): Promise<void> => {
+    try {
+      const response = await fetch("/api/todos", {
+        method: "PUT",
+        body: JSON.stringify(todo),
+      });
+      const data: Todo = await response.json();
+      setTodos((prev) => {
+        const filtered = prev.filter((item) => item.id !== todo.id);
+        filtered.push(data);
+        return filtered;
+      });
+    } catch (error) {
+      console.error("Error fetching todos:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSortChange = (e: SortChangeEvent): void => {
     setSortBy(e.target.value as SortOption);
     // TODO: Implement sorting logic - interviewee task
-    console.log("Sort by:", e.target.value);
   };
 
   if (loading) {
@@ -54,7 +73,6 @@ export default function Home() {
             >
               <option value="date">Date</option>
               <option value="title">Title</option>
-              <option value="completed">Status</option>
             </select>
           </div>
           <div className={styles.filterContainer}>
@@ -73,7 +91,16 @@ export default function Home() {
           {todos.length === 0 ? (
             <p className={styles.emptyState}>No todos found</p>
           ) : (
-            todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)
+            todos
+              .sort((a, b) => {
+                if (sortBy === "date") {
+                  return a[sortBy] < b[sortBy] ? 1 : -1;
+                }
+                return a[sortBy] > b[sortBy] ? 1 : -1;
+              })
+              .map((todo) => (
+                <TodoItem key={todo.id} todo={todo} putTodo={putTodo} />
+              ))
           )}
         </div>
       </main>
@@ -81,7 +108,7 @@ export default function Home() {
   );
 }
 
-const TodoItem = ({ todo }: TodoItemProps) => {
+const TodoItem = ({ todo, putTodo }: TodoItemProps) => {
   return (
     <div className={styles.todoItem}>
       <div className={styles.todoContent}>
@@ -91,6 +118,9 @@ const TodoItem = ({ todo }: TodoItemProps) => {
               type="checkbox"
               id={`todo-${todo.id}`}
               checked={todo.completed}
+              onChange={(e) =>
+                putTodo({ ...todo, completed: e.target.checked })
+              }
               className={styles.checkbox}
             />
             <label htmlFor={`todo-${todo.id}`} className={styles.checkboxLabel}>

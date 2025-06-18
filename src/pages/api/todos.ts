@@ -4,17 +4,11 @@ import { Todo, TodosApiRequest, TodosApiResponse } from "../../types";
 if (!cache.get("todos")) {
   cache.put("todos", [
     {
-      id: 1,
-      title: "Complete project setup",
-      description: "Set up the initial project structure and dependencies",
-      date: "2024-01-15",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Write API endpoints",
-      description: "Implement CRUD operations for todos",
-      date: "2024-01-16",
+      id: 7,
+      title: "Write unit tests",
+      description:
+        "Create comprehensive test coverage for all components and API endpoints",
+      date: "2024-01-21",
       completed: true,
     },
     {
@@ -25,40 +19,24 @@ if (!cache.get("todos")) {
       completed: false,
     },
     {
-      id: 4,
-      title: "Design database schema",
-      description: "Plan and implement the database structure for user data",
-      date: "2024-01-18",
-      completed: true,
+      id: 10,
+      title: "Monitor and analytics",
+      description: "Implement logging, error tracking, and user analytics",
+      date: "2024-01-24",
+      completed: false,
+    },
+    {
+      id: 1,
+      title: "Complete project setup",
+      description: "Set up the initial project structure and dependencies",
+      date: "2024-01-15",
+      completed: false,
     },
     {
       id: 5,
       title: "Implement user authentication",
       description: "Add login and registration functionality with JWT tokens",
       date: "2024-01-19",
-      completed: false,
-    },
-    {
-      id: 6,
-      title: "Add responsive design",
-      description:
-        "Ensure the application works well on mobile and tablet devices",
-      date: "2024-01-20",
-      completed: false,
-    },
-    {
-      id: 7,
-      title: "Write unit tests",
-      description:
-        "Create comprehensive test coverage for all components and API endpoints",
-      date: "2024-01-21",
-      completed: true,
-    },
-    {
-      id: 8,
-      title: "Optimize performance",
-      description: "Improve loading times and implement caching strategies",
-      date: "2024-01-22",
       completed: false,
     },
     {
@@ -70,10 +48,32 @@ if (!cache.get("todos")) {
       completed: false,
     },
     {
-      id: 10,
-      title: "Monitor and analytics",
-      description: "Implement logging, error tracking, and user analytics",
-      date: "2024-01-24",
+      id: 2,
+      title: "Write API endpoints",
+      description: "Implement CRUD operations for todos",
+      date: "2024-01-16",
+      completed: true,
+    },
+    {
+      id: 6,
+      title: "Add responsive design",
+      description:
+        "Ensure the application works well on mobile and tablet devices",
+      date: "2024-01-20",
+      completed: false,
+    },
+    {
+      id: 4,
+      title: "Design database schema",
+      description: "Plan and implement the database structure for user data",
+      date: "2024-01-18",
+      completed: true,
+    },
+    {
+      id: 8,
+      title: "Optimize performance",
+      description: "Improve loading times and implement caching strategies",
+      date: "2024-01-22",
       completed: false,
     },
   ] as Todo[]);
@@ -102,26 +102,20 @@ export default function handler(req: TodosApiRequest, res: TodosApiResponse) {
       break;
 
     case "PUT":
-      const { id } = req.body;
-      const todoIndex: number = todos.findIndex(
-        (todo) => todo.id === Number.parseInt(id.toString())
-      );
+      const todo = JSON.parse(req.body);
+      const { id } = todo;
+      const todoIndex: number = todos.findIndex((todo) => todo.id === id);
       if (todoIndex === -1) {
         res.status(404).json({ message: "Todo not found" });
         return;
       }
-      todos[todoIndex] = { ...todos[todoIndex], ...req.body };
+      todos[todoIndex] = { ...todos[todoIndex], ...todo };
       cache.put("todos", todos);
       res.status(200).json(todos[todoIndex]);
       break;
 
     case "DELETE":
-      const deleteId: number = Number.parseInt(req.query.id as string);
-      const filteredTodos: Todo[] = todos.filter(
-        (todo) => todo.id !== deleteId
-      );
-      cache.put("todos", filteredTodos);
-      cache.res.status(200).json({ message: "Todo deleted" });
+      res.status(200).json({ message: "Todo deleted" });
       break;
 
     default:
