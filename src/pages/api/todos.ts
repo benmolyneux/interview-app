@@ -49,7 +49,9 @@ export default function handler(req: TodosApiRequest, res: TodosApiResponse) {
       break;
 
     case "DELETE":
-      res.status(200).json({ message: "Todo deleted" });
+      res
+        .status(200)
+        .json({ message: "Todo failed to delete. There is not logic here" });
       break;
 
     default:
