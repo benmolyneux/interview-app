@@ -3,7 +3,7 @@
 The application is a basic TODO app written in NextJS (Typescript) using the pages router. There are several key files that you will work in:
 
 - src/pages/index.tsx - The application UI code
-- src/pages/api - The application API code
+- src/pages/api/todos.ts - The application API code
 - src/styles/globals.css - The CSS styling
 - src/types/index.ts - Types for the UI and API
 
