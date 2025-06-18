@@ -9,7 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     getTodos();
-  }, []);
+  }, [sortBy]);
 
   // API requests
   const getTodos = async (): Promise<void> => {
@@ -29,6 +29,9 @@ export default function Home() {
     try {
       const response = await fetch("/api/todos", {
         method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(todo),
       });
       const data: Todo = await response.json();
@@ -38,15 +41,12 @@ export default function Home() {
         return filtered;
       });
     } catch (error) {
-      console.error("Error fetching todos:", error);
-    } finally {
-      setLoading(false);
+      console.error("Error updating todo:", error);
     }
   };
 
   const handleSortChange = (e: SortChangeEvent): void => {
     setSortBy(e.target.value as SortOption);
-    // TODO: Implement sorting logic - interviewee task
   };
 
   if (loading) {
@@ -91,16 +91,9 @@ export default function Home() {
           {todos.length === 0 ? (
             <p className={styles.emptyState}>No todos found</p>
           ) : (
-            todos
-              .sort((a, b) => {
-                if (sortBy === "date") {
-                  return a[sortBy] < b[sortBy] ? 1 : -1;
-                }
-                return a[sortBy] > b[sortBy] ? 1 : -1;
-              })
-              .map((todo) => (
-                <TodoItem key={todo.id} todo={todo} putTodo={putTodo} />
-              ))
+            todos.map((todo) => (
+              <TodoItem key={todo.id} todo={todo} putTodo={putTodo} />
+            ))
           )}
         </div>
       </main>

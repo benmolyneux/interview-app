@@ -1,6 +1,50 @@
 import cache from "memory-cache";
 import { Todo, TodosApiRequest, TodosApiResponse } from "../../types";
 
+export default function handler(req: TodosApiRequest, res: TodosApiResponse) {
+  const { method } = req;
+  const todos: Todo[] = cache.get("todos") || [];
+
+  switch (method) {
+    case "GET":
+      res.status(200).json(todos);
+      break;
+
+    case "POST":
+      const newTodo: Todo = {
+        id: Date.now(),
+        title: req.body.title,
+        description: req.body.description,
+        date: req.body.date,
+        completed: false,
+      };
+      const updatedTodos: Todo[] = [...todos, newTodo];
+      cache.put("todos", updatedTodos);
+      res.status(201).json(newTodo);
+      break;
+
+    case "PUT":
+      const { id } = req.body;
+      const todoIndex: number = todos.findIndex((todo) => todo.id === id);
+      if (todoIndex === -1) {
+        res.status(404).json({ message: "Todo not found" });
+        return;
+      }
+      todos[todoIndex] = { ...todos[todoIndex], ...req.body };
+      cache.put("todos", todos);
+      res.status(200).json(todos[todoIndex]);
+      break;
+
+    case "DELETE":
+      res.status(200).json({ message: "Todo deleted" });
+      break;
+
+    default:
+      res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);
+      res.status(405).end(`Method ${method} Not Allowed`);
+  }
+}
+
 if (!cache.get("todos")) {
   cache.put("todos", [
     {
@@ -77,49 +121,4 @@ if (!cache.get("todos")) {
       completed: false,
     },
   ] as Todo[]);
-}
-
-export default function handler(req: TodosApiRequest, res: TodosApiResponse) {
-  const { method } = req;
-  const todos: Todo[] = cache.get("todos") || [];
-
-  switch (method) {
-    case "GET":
-      res.status(200).json(todos);
-      break;
-
-    case "POST":
-      const newTodo: Todo = {
-        id: Date.now(),
-        title: req.body.title,
-        description: req.body.description,
-        date: req.body.date,
-        completed: false,
-      };
-      const updatedTodos: Todo[] = [...todos, newTodo];
-      cache.put("todos", updatedTodos);
-      res.status(201).json(newTodo);
-      break;
-
-    case "PUT":
-      const todo = JSON.parse(req.body);
-      const { id } = todo;
-      const todoIndex: number = todos.findIndex((todo) => todo.id === id);
-      if (todoIndex === -1) {
-        res.status(404).json({ message: "Todo not found" });
-        return;
-      }
-      todos[todoIndex] = { ...todos[todoIndex], ...todo };
-      cache.put("todos", todos);
-      res.status(200).json(todos[todoIndex]);
-      break;
-
-    case "DELETE":
-      res.status(200).json({ message: "Todo deleted" });
-      break;
-
-    default:
-      res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);
-      res.status(405).end(`Method ${method} Not Allowed`);
-  }
 }

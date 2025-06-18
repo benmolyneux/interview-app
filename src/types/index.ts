@@ -11,6 +11,7 @@ export interface Todo {
 // Component Props
 export interface TodoItemProps {
   todo: Todo;
+  putTodo: (todo: Todo) => Promise<void>;
 }
 
 // Sort options
