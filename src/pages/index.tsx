@@ -6,14 +6,13 @@ export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [sortBy, setSortBy] = useState<SortOption>("date");
-  const [hideCompleted, setHideCompleted] = useState<boolean>(false);
 
   useEffect(() => {
     getTodos();
   }, [sortBy]);
 
   // API requests
-  const getTodos = async () => {
+  const getTodos = async (): Promise<void> => {
     try {
       console.log("Fetching TODOs");
       const response = await fetch("/api/todos");
@@ -26,7 +25,7 @@ export default function Home() {
     }
   };
 
-  const putTodo = async (todo: Todo) => {
+  const putTodo = async (todo: Todo): Promise<void> => {
     try {
       const response = await fetch("/api/todos", {
         method: "PUT",
@@ -44,15 +43,6 @@ export default function Home() {
     } catch (error) {
       console.error("Error updating todo:", error);
     }
-  };
-
-  const deleteTodo = async (id: number) => {
-    try {
-      await fetch(`/api/todos?id=${id}`, {
-        method: "DELETE",
-      });
-      setTodos((prev) => prev.filter((todo) => todo.id !== id));
-    } catch (error) {}
   };
 
   const handleSortChange = (e: SortChangeEvent): void => {
@@ -90,8 +80,6 @@ export default function Home() {
           <input
             type="checkbox"
             id="hideCompleted"
-            checked={hideCompleted}
-            onChange={(e) => setHideCompleted(e.target.checked)}
             className={styles.checkbox}
           />
         </div>
@@ -100,21 +88,9 @@ export default function Home() {
           {todos.length === 0 ? (
             <p className={styles.emptyState}>No todos found</p>
           ) : (
-            todos
-              .filter((todo) => (hideCompleted ? !todo.completed : true))
-              .sort((a, b) => {
-                const conditionA = sortBy === "date" ? -1 : 1;
-                const conditionB = sortBy === "date" ? 1 : -1;
-                return a[sortBy] > b[sortBy] ? conditionA : conditionB;
-              })
-              .map((todo) => (
-                <TodoItem
-                  key={todo.id}
-                  todo={todo}
-                  putTodo={putTodo}
-                  deleteTodo={deleteTodo}
-                />
-              ))
+            todos.map((todo) => (
+              <TodoItem key={todo.id} todo={todo} putTodo={putTodo} />
+            ))
           )}
         </div>
       </main>
@@ -122,7 +98,7 @@ export default function Home() {
   );
 }
 
-const TodoItem = ({ todo, putTodo, deleteTodo }: TodoItemProps) => {
+const TodoItem = ({ todo, putTodo }: TodoItemProps) => {
   return (
     <div className={styles.todoItem}>
       <input
@@ -145,17 +121,9 @@ const TodoItem = ({ todo, putTodo, deleteTodo }: TodoItemProps) => {
       <button
         className={styles.deleteButton}
         aria-label={`Delete ${todo.title}`}
-        onClick={() => deleteTodo(todo.id)}
       >
         Delete
       </button>
-      <div
-        className={`${styles.todoDescription} ${
-          todo.completed ? styles.completed : ""
-        }`}
-      >
-        {todo.description}
-      </div>
     </div>
   );
 };

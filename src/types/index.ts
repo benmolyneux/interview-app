@@ -4,7 +4,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 export interface Todo {
   id: number;
   title: string;
-  description: string;
   date: string;
   completed: boolean;
 }
@@ -13,7 +12,6 @@ export interface Todo {
 export interface TodoItemProps {
   todo: Todo;
   putTodo: (todo: Todo) => Promise<void>;
-  deleteTodo: (id: number) => Promise<void>;
 }
 
 // Sort options
