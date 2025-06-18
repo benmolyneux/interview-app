@@ -157,17 +157,6 @@
   margin-left: 1rem;
 }
 
-.todoDescription {
-  margin: 0;
-  color: #666;
-  line-height: 1.5;
-}
-
-.todoDescription.completed {
-  text-decoration: line-through;
-  color: #aaa;
-}
-
 .deleteButton {
   background-color: #dc3545;
   color: white;
