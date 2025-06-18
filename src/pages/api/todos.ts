@@ -24,6 +24,58 @@ if (!cache.get("todos")) {
       date: "2024-01-17",
       completed: false,
     },
+    {
+      id: 4,
+      title: "Design database schema",
+      description: "Plan and implement the database structure for user data",
+      date: "2024-01-18",
+      completed: true,
+    },
+    {
+      id: 5,
+      title: "Implement user authentication",
+      description: "Add login and registration functionality with JWT tokens",
+      date: "2024-01-19",
+      completed: false,
+    },
+    {
+      id: 6,
+      title: "Add responsive design",
+      description:
+        "Ensure the application works well on mobile and tablet devices",
+      date: "2024-01-20",
+      completed: false,
+    },
+    {
+      id: 7,
+      title: "Write unit tests",
+      description:
+        "Create comprehensive test coverage for all components and API endpoints",
+      date: "2024-01-21",
+      completed: true,
+    },
+    {
+      id: 8,
+      title: "Optimize performance",
+      description: "Improve loading times and implement caching strategies",
+      date: "2024-01-22",
+      completed: false,
+    },
+    {
+      id: 9,
+      title: "Deploy to production",
+      description:
+        "Set up CI/CD pipeline and deploy the application to cloud hosting",
+      date: "2024-01-23",
+      completed: false,
+    },
+    {
+      id: 10,
+      title: "Monitor and analytics",
+      description: "Implement logging, error tracking, and user analytics",
+      date: "2024-01-24",
+      completed: false,
+    },
   ] as Todo[]);
 }
 

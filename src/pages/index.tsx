@@ -11,6 +11,7 @@ export default function Home() {
     fetchTodos();
   }, []);
 
+  // API requests
   const fetchTodos = async (): Promise<void> => {
     try {
       const response = await fetch("/api/todos");
@@ -56,6 +57,16 @@ export default function Home() {
               <option value="completed">Status</option>
             </select>
           </div>
+          <div className={styles.filterContainer}>
+            <label htmlFor="hideCompleted" className={styles.filterLabel}>
+              Hide Completed
+            </label>
+            <input
+              type="checkbox"
+              id="hideCompleted"
+              className={styles.checkbox}
+            />
+          </div>
         </div>
 
         <div className={styles.todoList}>
@@ -94,13 +105,6 @@ const TodoItem = ({ todo }: TodoItemProps) => {
           </div>
           <span className={styles.todoDate}>{todo.date}</span>
         </div>
-        <p
-          className={`${styles.todoDescription} ${
-            todo.completed ? styles.completed : ""
-          }`}
-        >
-          {todo.description}
-        </p>
       </div>
       <button
         className={styles.deleteButton}

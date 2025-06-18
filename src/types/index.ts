@@ -1,10 +1,9 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from "next";
 
 // Core Todo interface
 export interface Todo {
   id: number;
   title: string;
-  description: string;
   date: string;
   completed: boolean;
 }
@@ -15,7 +14,7 @@ export interface TodoItemProps {
 }
 
 // Sort options
-export type SortOption = 'date' | 'title' | 'completed';
+export type SortOption = "date" | "title" | "completed";
 
 // API Types
 export interface CreateTodoRequest {
@@ -42,7 +41,9 @@ export type TodosApiRequest = NextApiRequest & {
   };
 };
 
-export type TodosApiResponse = NextApiResponse<Todo[] | Todo | { message: string }>;
+export type TodosApiResponse = NextApiResponse<
+  Todo[] | Todo | { message: string }
+>;
 
 // Event handlers
 export interface SortChangeEvent extends React.ChangeEvent<HTMLSelectElement> {}

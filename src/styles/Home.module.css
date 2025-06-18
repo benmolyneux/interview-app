@@ -34,7 +34,8 @@
 .controls {
   margin-bottom: 2rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .sortContainer {
@@ -43,9 +44,28 @@
   gap: 0.5rem;
 }
 
+.filterContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .sortLabel {
   font-weight: 500;
   color: #555;
+}
+
+.filterLabel {
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.filterCheckbox {
+  width: 1.1rem;
+  height: 1.1rem;
+  cursor: pointer;
 }
 
 .sortSelect {
