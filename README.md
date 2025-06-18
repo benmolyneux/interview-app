@@ -1,9 +1,3 @@
-# Setup
-
-- Install dependancies
-- Run application
-- Open application in the browser
-
 # Overview
 
 The application is a basic TODO app written in NextJS (Typescript) using the pages router. There are several key files that you will work in:
@@ -12,6 +6,14 @@ The application is a basic TODO app written in NextJS (Typescript) using the pag
 - src/pages/api - The application API code
 - src/styles/globals.css - The CSS styling
 - src/types/index.ts - Types for the UI and API
+
+The API uses an in-memory cache to simulate a database. The package it is using is called [memory-cache](https://www.npmjs.com/package/memory-cache).
+
+# Setup
+
+- Install dependancies
+- Run application
+- Open application in the browser
 
 # Tasks (30 minutes)
 
