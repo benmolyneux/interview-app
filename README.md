@@ -17,7 +17,7 @@ The API uses an in-memory cache to simulate a database. The package it is using 
 
 # Tasks (30 minutes)
 
-- Add the description to the TodoItem. It should be stlyed and crossed out when the item is marked as completed (Get off mark, ability to read existing code and typescript errors)
+- Add the description to the TodoItem. It should be styled and crossed out when the item is marked as completed (Get off mark, ability to read existing code and typescript errors)
 
 - When the 'Hide Completed' checkbox is checked, all completed tasks should not be visible (General react patterns and js filtering)
 
