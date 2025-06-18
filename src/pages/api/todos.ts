@@ -36,6 +36,9 @@ export default function handler(req: TodosApiRequest, res: TodosApiResponse) {
       break;
 
     case "DELETE":
+      const deleteId = parseInt(req.query.id || "");
+      const newTodos = todos.filter((todo) => todo.id !== deleteId);
+      cache.put("todos", newTodos);
       res.status(200).json({ message: "Todo deleted" });
       break;
 

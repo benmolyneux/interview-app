@@ -38,8 +38,6 @@
   align-items: center;
 }
 
-
-
 .sortLabel {
   font-weight: 500;
   color: #555;
@@ -83,6 +81,7 @@
   border-radius: 8px;
   padding: 1.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -115,7 +114,7 @@
   padding-left: 1rem;
 }
 
-.todoTitle.completed {
+.completed {
   text-decoration: line-through;
   color: #888;
 }
@@ -127,6 +126,12 @@
   margin-left: 1rem;
   padding-top: 0.5rem;
   padding-right: 1rem;
+}
+
+.todoDescription {
+  width: 100%;
+  color: #666;
+  padding: 0.5rem 0;
 }
 
 .deleteButton {
