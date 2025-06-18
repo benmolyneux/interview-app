@@ -1,61 +1,20 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/Home.module.css";
-
-const TodoItem = ({ todo }) => {
-  return (
-    <div className={styles.todoItem}>
-      <div className={styles.todoContent}>
-        <div className={styles.todoHeader}>
-          <div className={styles.checkboxContainer}>
-            <input
-              type="checkbox"
-              id={`todo-${todo.id}`}
-              checked={todo.completed}
-              className={styles.checkbox}
-            />
-            <label htmlFor={`todo-${todo.id}`} className={styles.checkboxLabel}>
-              <h3
-                className={`${styles.todoTitle} ${
-                  todo.completed ? styles.completed : ""
-                }`}
-              >
-                {todo.title}
-              </h3>
-            </label>
-          </div>
-          <span className={styles.todoDate}>{todo.date}</span>
-        </div>
-        <p
-          className={`${styles.todoDescription} ${
-            todo.completed ? styles.completed : ""
-          }`}
-        >
-          {todo.description}
-        </p>
-      </div>
-      <button
-        className={styles.deleteButton}
-        aria-label={`Delete ${todo.title}`}
-      >
-        Delete
-      </button>
-    </div>
-  );
-};
+import { Todo, TodoItemProps, SortOption, SortChangeEvent } from "../types";
 
 export default function Home() {
-  const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("date");
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [sortBy, setSortBy] = useState<SortOption>("date");
 
   useEffect(() => {
     fetchTodos();
   }, []);
 
-  const fetchTodos = async () => {
+  const fetchTodos = async (): Promise<void> => {
     try {
       const response = await fetch("/api/todos");
-      const data = await response.json();
+      const data: Todo[] = await response.json();
       setTodos(data);
     } catch (error) {
       console.error("Error fetching todos:", error);
@@ -64,8 +23,8 @@ export default function Home() {
     }
   };
 
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
+  const handleSortChange = (e: SortChangeEvent): void => {
+    setSortBy(e.target.value as SortOption);
     // TODO: Implement sorting logic - interviewee task
     console.log("Sort by:", e.target.value);
   };
@@ -110,6 +69,48 @@ export default function Home() {
     </div>
   );
 }
+
+const TodoItem = ({ todo }: TodoItemProps) => {
+  return (
+    <div className={styles.todoItem}>
+      <div className={styles.todoContent}>
+        <div className={styles.todoHeader}>
+          <div className={styles.checkboxContainer}>
+            <input
+              type="checkbox"
+              id={`todo-${todo.id}`}
+              checked={todo.completed}
+              className={styles.checkbox}
+            />
+            <label htmlFor={`todo-${todo.id}`} className={styles.checkboxLabel}>
+              <h3
+                className={`${styles.todoTitle} ${
+                  todo.completed ? styles.completed : ""
+                }`}
+              >
+                {todo.title}
+              </h3>
+            </label>
+          </div>
+          <span className={styles.todoDate}>{todo.date}</span>
+        </div>
+        <p
+          className={`${styles.todoDescription} ${
+            todo.completed ? styles.completed : ""
+          }`}
+        >
+          {todo.description}
+        </p>
+      </div>
+      <button
+        className={styles.deleteButton}
+        aria-label={`Delete ${todo.title}`}
+      >
+        Delete
+      </button>
+    </div>
+  );
+};
 
 export async function getServerSideProps() {
   // TODO: Implement server-side data fetching if needed - interviewee task

@@ -1,4 +1,5 @@
 import cache from "memory-cache";
+import { Todo, TodosApiRequest, TodosApiResponse } from "../../types";
 
 if (!cache.get("todos")) {
   cache.put("todos", [
@@ -23,12 +24,12 @@ if (!cache.get("todos")) {
       date: "2024-01-17",
       completed: false,
     },
-  ]);
+  ] as Todo[]);
 }
 
-export default function handler(req, res) {
+export default function handler(req: TodosApiRequest, res: TodosApiResponse) {
   const { method } = req;
-  const todos = cache.get("todos") || [];
+  const todos: Todo[] = cache.get("todos") || [];
 
   switch (method) {
     case "GET":
@@ -36,22 +37,22 @@ export default function handler(req, res) {
       break;
 
     case "POST":
-      const newTodo = {
+      const newTodo: Todo = {
         id: Date.now(),
         title: req.body.title,
         description: req.body.description,
         date: req.body.date,
         completed: false,
       };
-      const updatedTodos = [...todos, newTodo];
+      const updatedTodos: Todo[] = [...todos, newTodo];
       cache.put("todos", updatedTodos);
       res.status(201).json(newTodo);
       break;
 
     case "PUT":
       const { id } = req.body;
-      const todoIndex = todos.findIndex(
-        (todo) => todo.id === Number.parseInt(id)
+      const todoIndex: number = todos.findIndex(
+        (todo) => todo.id === Number.parseInt(id.toString())
       );
       if (todoIndex === -1) {
         res.status(404).json({ message: "Todo not found" });
@@ -63,10 +64,12 @@ export default function handler(req, res) {
       break;
 
     case "DELETE":
-      const deleteId = Number.parseInt(req.query.id);
-      const filteredTodos = todos.filter((todo) => todo.id !== deleteId);
+      const deleteId: number = Number.parseInt(req.query.id as string);
+      const filteredTodos: Todo[] = todos.filter(
+        (todo) => todo.id !== deleteId
+      );
       cache.put("todos", filteredTodos);
-      res.status(200).json({ message: "Todo deleted" });
+      cache.res.status(200).json({ message: "Todo deleted" });
       break;
 
     default:
