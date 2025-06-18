@@ -23,7 +23,7 @@ The API uses an in-memory cache to simulate a database. The package it is using 
 
 - The items should be sorted by the selected key in the sort select box, date in descending order, title in ascending order (Same again but js sorting)
 
-- Get delete button working with application (API REST understanding and bit of above)
+- The delete button should remove the todo item from the list and delete it using the API (API REST understanding and bit of above)
 
 - Create a page for an individual TODO
 

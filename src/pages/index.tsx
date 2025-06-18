@@ -12,7 +12,7 @@ export default function Home() {
   }, [sortBy]);
 
   // API requests
-  const getTodos = async (): Promise<void> => {
+  const getTodos = async () => {
     try {
       console.log("Fetching TODOs");
       const response = await fetch("/api/todos");
@@ -25,7 +25,7 @@ export default function Home() {
     }
   };
 
-  const putTodo = async (todo: Todo): Promise<void> => {
+  const putTodo = async (todo: Todo) => {
     try {
       const response = await fetch("/api/todos", {
         method: "PUT",

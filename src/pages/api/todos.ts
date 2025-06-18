@@ -7,7 +7,20 @@ export default function handler(req: TodosApiRequest, res: TodosApiResponse) {
 
   switch (method) {
     case "GET":
-      res.status(200).json(todos);
+      const getId = parseInt(req.query.id || "");
+      if (req.query.id) {
+        const todo = todos.find((todo) => {
+          console.log(getId, todo.id);
+          return getId == todo.id;
+        });
+        if (todo) {
+          res.status(200).json(todo);
+        } else {
+          res.status(500).json({ message: "Todo not found" });
+        }
+      } else {
+        res.status(200).json(todos);
+      }
       break;
 
     case "POST":
