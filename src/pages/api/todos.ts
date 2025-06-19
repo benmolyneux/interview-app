@@ -57,9 +57,9 @@ export default async function handler(
       break;
 
     case "DELETE":
-      const deleteId = req.body.id;
-      await db.delete(todos).where(eq(todos.id, deleteId));
-      res.status(200).json({ message: `Todo with ID ${deleteId} deleted` });
+      res
+        .status(200)
+        .json({ message: `Todo failed to delete. There is no logic here!` });
       break;
 
     default:
