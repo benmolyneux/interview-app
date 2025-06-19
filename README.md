@@ -25,7 +25,7 @@ The API uses an in-memory RDS database and Drizzle ORM. Documentation for Drizzl
 
 - The delete button should remove the todo item from the list and delete it using the API (API REST understanding and bit of above)
 
-- Create a page for an individual TODO
+- Create a page for an individual TODO. You can get an individual todo from the api by passing an `id` query parameter to the GET endpoint
 
 # Questions (15 minutes)
 
