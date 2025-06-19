@@ -19,7 +19,9 @@ The API uses an in-memory RDS database and Drizzle ORM. Documentation for Drizzl
 
 # Tasks (30 minutes)
 
-- Add the description to the TodoItem UI item. It should be styled and crossed out when the item is marked as completed (Get off mark, ability to read existing code and typescript errors)
+- Add the description to the TodoItem UI item. It should be styled similarly to the screenshot below and crossed out when the item is marked as completed (Get off mark, ability to read existing code and typescript errors)
+
+![design](./design.png)
 
 - When the 'Hide Completed' checkbox is checked, all completed tasks should not be visible (General react patterns and js filtering)
 

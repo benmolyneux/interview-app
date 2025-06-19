@@ -97,29 +97,31 @@ export default function Home() {
 const TodoItem = ({ todo, putTodo }: TodoItemProps) => {
   return (
     <div className={styles.todoItem}>
-      <input
-        type="checkbox"
-        id={`todo-${todo.id}`}
-        checked={todo.completed}
-        onChange={(e) => putTodo({ ...todo, completed: e.target.checked })}
-        className={styles.checkbox}
-      />
-      <label htmlFor={`todo-${todo.id}`} className={styles.checkboxLabel}>
-        <h3
-          className={`${styles.todoTitle} ${
-            todo.completed ? styles.completed : ""
-          }`}
+      <div className={styles.todoOverview}>
+        <input
+          type="checkbox"
+          id={`todo-${todo.id}`}
+          checked={todo.completed}
+          onChange={(e) => putTodo({ ...todo, completed: e.target.checked })}
+          className={styles.checkbox}
+        />
+        <label htmlFor={`todo-${todo.id}`} className={styles.checkboxLabel}>
+          <h3
+            className={`${styles.todoTitle} ${
+              todo.completed ? styles.completed : ""
+            }`}
+          >
+            {todo.title}
+          </h3>
+        </label>
+        <span className={styles.todoDate}>{todo.date}</span>
+        <button
+          className={styles.deleteButton}
+          aria-label={`Delete ${todo.title}`}
         >
-          {todo.title}
-        </h3>
-      </label>
-      <span className={styles.todoDate}>{todo.date}</span>
-      <button
-        className={styles.deleteButton}
-        aria-label={`Delete ${todo.title}`}
-      >
-        Delete
-      </button>
+          Delete
+        </button>
+      </div>
     </div>
   );
 };
