@@ -7,6 +7,8 @@ The application is a basic TODO app written in NextJS (Typescript) using the pag
 - src/styles/Home.Module.css - The CSS styling
 - src/types/index.ts - Types for the UI and API
 
+Note: You will NOT be required to in the db directory
+
 The API uses an in-memory RDS database and Drizzle ORM. Documentation for Drizzle ORM queries is here: https://orm.drizzle.team/docs/rqb.
 
 # Setup
