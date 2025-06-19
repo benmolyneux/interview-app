@@ -7,7 +7,7 @@ The application is a basic TODO app written in NextJS (Typescript) using the pag
 - src/styles/Home.Module.css - The CSS styling
 - src/types/index.ts - Types for the UI and API
 
-The API uses an in-memory cache to simulate a database. The package it is using is called [memory-cache](https://www.npmjs.com/package/memory-cache).
+The API uses an in-memory RDS database and Drizzle ORM. Documentation for Drizzle ORM queries is here: https://orm.drizzle.team/docs/rqb.
 
 # Setup
 
