@@ -9,7 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     getTodos();
-  }, [sortBy]);
+  }, []);
 
   // API requests
   const getTodos = async () => {
@@ -35,11 +35,7 @@ export default function Home() {
         body: JSON.stringify(todo),
       });
       const data: Todo = await response.json();
-      setTodos((prev) => {
-        const filtered = prev.filter((item) => item.id !== todo.id);
-        filtered.push(data);
-        return filtered;
-      });
+      getTodos();
     } catch (error) {
       console.error("Error updating todo:", error);
     }
